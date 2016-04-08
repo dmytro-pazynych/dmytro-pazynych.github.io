@@ -47,7 +47,7 @@
     </table>
     </div>
         
-    <div class="col-md-4 col-xs-4"><div id="card"><p></p></div></div>
+    <div class="col-md-4 col-xs-4"><div id="card" class="thumbnail"></div></div>
     
     </div>
         
@@ -87,13 +87,19 @@ function getChank() {
 /*---------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function getCard(){
-    $("td, td img").click(function(event){
-        console.log(event.target)
+    window.onclick = function(event) {
+        $("#card").html("");
+        console.log(event.srcElement.className)// then e.srcElement.className has the class
+        var number = parseFloat(event.srcElement.className);
+        
         $("#card").show(0.01);
-        $.getJSON('http://pokeapi.co/api/v2/pokemon/1/', function (data) {
-            $("#card").html("Triggered by a " + event.target + " element.");   
+        $.getJSON('http://pokeapi.co/api/v2/pokemon/'+number+'/', function (data) {
+            $("#card").html("This is " + data.name + " pokemon.<br> <img src='http://pokeapi.co/media/img/"+number+".png/' />"); 
+                
         })
-    })
+        
+        
+    }
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------*/

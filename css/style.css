@@ -30,9 +30,9 @@ table {
 
 #card {
     position: fixed;
-    background-color: aqua;
-    height: 500px;
-    width: 150px;
+    background-color: cornflowerblue;
+    height: auto;
+    width: auto;
     display: none;
 }
 

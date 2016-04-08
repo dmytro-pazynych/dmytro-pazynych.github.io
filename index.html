@@ -88,16 +88,19 @@ function getChank() {
 
 function getCard(){
     window.onclick = function(event) {
+        
         $("#card").html("");
         console.log(event.srcElement.className)// then e.srcElement.className has the class
         var number = parseFloat(event.srcElement.className);
-        
-        $("#card").show(0.01);
-        $.getJSON('http://pokeapi.co/api/v2/pokemon/'+number+'/', function (data) {
-            $("#card").html("This is " + data.name + " pokemon.<br> <img src='http://pokeapi.co/media/img/"+number+".png/' />"); 
+        if (isNaN(number)){
+            $("#card").hide();
+        } else {
+            $("#card").show(0.01);
+            $.getJSON('http://pokeapi.co/api/v2/pokemon/'+number+'/', function (data) {
+            $("#card").html("This is " + data.name + " pokemon.<br> <img src='http://pokeapi.co/media/img/"+number+".png/' /> <br>" +data.name+" #" + data.id); 
                 
-        })
-        
+            })
+        }
         
     }
 }

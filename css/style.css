@@ -35,3 +35,11 @@ table {
     width: 150px;
     display: none;
 }
+
+.table {
+    border-bottom:0px !important;
+}
+
+.table th, .table td {
+    border: 0px !important;
+}

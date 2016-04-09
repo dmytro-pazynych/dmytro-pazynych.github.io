@@ -22,24 +22,30 @@
     <div class="col-md-8 col-xs-8">
         
     <table class="table">
+        
        
+        
     </table>
     </div>
         
-    <div class="col-md-4 col-xs-4"><div id="card" class="thumbnail"></div></div>
+    <div class="col-md-4 col-xs-4">
+        <div id="card" class="thumbnail">
+            
+        </div>
+    </div>
     
     </div>
         
     <div class="row">
     <div class="col-md-8 col-xs-8">    
-    <button class="btn btn-primary btn-lg">Load more</button>
+        <img src="http://www.theodo.fr/uploads/blog//2015/12/spinner.gif" id="spinner"/>
+        <button class="btn btn-primary btn-lg">Load more</button>
     </div> 
     </div>
     
     </div>
-    
     <script>
-    ///////////////////////////////////////////////////////////////////
+    	///////////////////////////////////////////////////////////////////
 function getType(id, i, j){
     $.getJSON('http://pokeapi.co/api/v2/pokemon/'+id+'/', function (data) {
         
@@ -50,6 +56,7 @@ function getType(id, i, j){
         };
     }
 )}
+
 
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -136,7 +143,9 @@ $(document).ready(function(){
     })
     getCard();
 })
-</script>
+
+
+    </script>
     
     
 </body>

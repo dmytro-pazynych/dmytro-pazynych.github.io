@@ -59,19 +59,27 @@
     
     </div>
     
-    <script>var fromNum = 0; //where start getting new chunk
+    <script>
+/*---------------------------------------------------------------------------------------------------------------------------------------------*/
+var fromNum = 0; //where start getting new chunk
 var counter = 1; //counter = pokemon's id
 var i = 1; //variable for putting data into the table's row
 
-/*---------------------------------------------------------------------------------------------------------------------------------------------*/
-function getChank() {
+function getChunk() {
     
-    var j = 1; // --- table's cell
+    var one = counter; var two = counter +1; var three = counter +2; var four = counter +3; var five = counter +4; var six = counter +5; var seven = counter +6; var eight = counter +7; var nine = counter +8; var ten = counter +9; var eleven = counter +10; var twelve = counter +11; 
+    
+    $("table").append("<tr><td class=" + one + "></td><td class=" + two + "></td><td class=" + three + "></td></tr><tr><td class=" + four + "></td><td class=" + five + "></td><td class=" + six + "></td></tr><tr><td class=" + seven + "></td><td class=" + eight + "></td><td class=" + nine + "></td></tr><tr><td class=" + ten + "></td><td class=" + eleven + "></td><td class=" + twelve + "></td></tr>"); //add table where we can put new data
+    
+    
+    var j = 1; // --- table's cell 
+    
     $.getJSON('http://pokeapi.co/api/v2/pokemon/?limit=12&offset='+ fromNum +'', function (data) {
+        
         for(var k=1; k<=12; k++){
             var c = k-1; //variable for array
-            $('tr:nth-child(' + i + ') td:nth-child(' + j + ')').append("<img class=" + counter + " src='http://pokeapi.co/media/img/"+counter+".png/' /><br>" + data.results[c].name + "<p>"+counter+"</p>"); //add img and name 
-           
+            $('tr:nth-child(' + i + ') td:nth-child(' + j + ')').append("<img class=" + counter + " src='http://pokeapi.co/media/img/"+counter+".png/' /><br>" + data.results[c].name); //add img and name             
+            getType(counter, i, j);
             counter +=1;
             if (j<3){
                 j++;
@@ -80,11 +88,12 @@ function getChank() {
                 j = 1;
                 
             } 
-        }    
+        }
     })
-    fromNum = fromNum + 12; //to start getting new chunk after old 12 elements 
+    fromNum = fromNum + 12; //to start getting new chunk after old 12 elements
 }
-/*---------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getCard(){
     window.onclick = function(event) {
@@ -124,17 +133,18 @@ function getInfo(id){ //get stats for card
             $("#card").append('<tr><td>Total moves</td><td>' + data.moves.length +'</td></tr>'); //total moves  
         })    
 }
-//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*---------------------------------------------------------------------------------------------------------------------------------------------*/
 $(document).ready(function(){
-    getChank(); //base chunk
+    getChunk(); //base chunk
     $("button").click(function(){
-        $("table").append("<tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr>"); //add table where we can put new data
-        getChank(); //next chunk
+       
+        
+        getChunk(); //next chunk
     })
     getCard();
-})</script>
+})
+</script>
     
     
 </body>

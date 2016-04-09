@@ -11,7 +11,7 @@ nav {
 td {
     
     text-align:  center;
-    color: blue;
+    
 }
 
 td:hover {
@@ -19,13 +19,12 @@ td:hover {
 }
 
 button {
-    width:100%; 
-margin-top: 20px;
+    width:100%;
+    margin-bottom: 20px !important;
 }
 
 table {
     width: auto;
-    
     border: none;
 }
 
@@ -34,15 +33,23 @@ table {
     background-color: cornflowerblue;
     height: auto;
     width: auto;
+    padding: auto;
     display: none;
+    text-align: center;
 }
 
 .table {
     border-bottom:0px !important;
-}
 
+}
 .table th, .table td {
     border: 0px !important;
+}
+
+#spinner {
+    margin-left: 30%;
+    display: none;
+    
 }
 
 #card img {

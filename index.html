@@ -22,28 +22,7 @@
     <div class="col-md-8 col-xs-8">
         
     <table class="table">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
        
-        
     </table>
     </div>
         
@@ -60,6 +39,19 @@
     </div>
     
     <script>
+    ///////////////////////////////////////////////////////////////////
+function getType(id, i, j){
+    $.getJSON('http://pokeapi.co/api/v2/pokemon/'+id+'/', function (data) {
+        
+        if (data.types.length === 2){ //type
+            $('tr:nth-child(' + i + ') td:nth-child(' + j + ')').append("<br>" + data.types[0].type.name +', ' + data.types[1].type.name);
+        } else {
+            $('tr:nth-child(' + i + ') td:nth-child(' + j + ')').append("<br>" + data.types[0].type.name);
+        };
+    }
+)}
+
+
 /*---------------------------------------------------------------------------------------------------------------------------------------------*/
 var fromNum = 0; //where start getting new chunk
 var counter = 1; //counter = pokemon's id

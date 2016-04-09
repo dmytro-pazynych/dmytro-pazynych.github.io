@@ -96,7 +96,9 @@ function getCard(){
             $("#card").hide();
         } else {
             $("#card").show(0.01);
-            getInfo(number)
+            $.getJSON('http://pokeapi.co/api/v2/pokemon/'+number+'/', function (data) {
+            $("#card").html("This is " + data.name + " pokemon.<br> <img src='http://pokeapi.co/media/img/"+number+".png/' /> <br>" +data.name+" #" + data.id); 
+            getInfo(number);
             })
         }
         

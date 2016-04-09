@@ -96,27 +96,32 @@ function getCard(){
             $("#card").hide();
         } else {
             $("#card").show(0.01);
-            $.getJSON('http://pokeapi.co/api/v2/pokemon/'+number+'/', function (data) {
-            $("#card").html("This is " + data.name + " pokemon.<br> <img src='http://pokeapi.co/media/img/"+number+".png/' /> <br>" +data.name+" #" + data.id); 
-            getInfo(number);
-                
-            })
+            getInfo(number);     
         }
         
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
-function getInfo(id){ 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getInfo(id){ //get stats for card
         $.getJSON('http://pokeapi.co/api/v2/pokemon/'+id+'/', function (data) {
-            $("div #card").append('<tr><td>Attack</td><td>' + data.stats[4].base_stat +'</td></tr>'); //attack
-            $("div #card").append('<tr><td>Defence</td><td>' + data.stats[3].base_stat +'</td></tr>'); //defence
-            $("div #card").append('<tr><td>HP</td><td>' + data.stats[4].base_stat +'</td></tr>'); //HP
-            $("div #card").append('<tr><td>SP attack</td><td>' + data.stats[2].base_stat +'</td></tr>'); //SP attack
-            $("div #card").append('<tr><td>SP attack</td><td>' + data.stats[1].base_stat +'</td></tr>');  //SP defence
-            $("div #card").append('<tr><td>Speed</td><td>' + data.stats[0].base_stat +'</td></tr>'); //speed
-            $("div #card").append('<tr><td>Weight</td><td>' + data.weight +'</td></tr>'); //weight
-            $("div #card").append('<tr><td>Total moves</td><td>' + data.moves.length +'</td></tr>'); //total moves  
+            $("#card").append("<img src='http://pokeapi.co/media/img/"+id+".png/' /> <br>"); //img
+            $("#card").append(data.name + " #" + data.id); //name and id
+            
+            if (data.types.length === 2){ //type
+                $("#card").append('<tr><td>Type</td><td>' + data.types[0].type.name +', ' + data.types[1].type.name + '</td></tr>');
+            } else {
+            $("#card").append('<tr><td>Type</td><td>' + data.types[0].type.name +'</td></tr>');
+            };
+            
+            $("#card").append('<tr><td>Attack</td><td>' + data.stats[4].base_stat +'</td></tr>'); //attack
+            $("#card").append('<tr><td>Defence</td><td>' + data.stats[3].base_stat +'</td></tr>'); //defence
+            $("#card").append('<tr><td>HP</td><td>' + data.stats[4].base_stat +'</td></tr>'); //HP
+            $("#card").append('<tr><td>SP attack</td><td>' + data.stats[2].base_stat +'</td></tr>'); //SP attack
+            $("#card").append('<tr><td>SP attack</td><td>' + data.stats[1].base_stat +'</td></tr>');  //SP defence
+            $("#card").append('<tr><td>Speed</td><td>' + data.stats[0].base_stat +'</td></tr>'); //speed
+            $("#card").append('<tr><td>Weight</td><td>' + data.weight +'</td></tr>'); //weight
+            $("#card").append('<tr><td>Total moves</td><td>' + data.moves.length +'</td></tr>'); //total moves  
         })    
 }
 //////////////////////////////////////////////////////////////////////////////////////////////

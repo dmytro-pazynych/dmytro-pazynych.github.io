@@ -97,7 +97,7 @@ function getChunk() {
 function getCard(){
     window.onclick = function(event) {
         
-        $("#card").html("");
+        $("#card").html("loading...");
         console.log(event.srcElement.className)// then e.srcElement.className has the class
         var number = parseFloat(event.srcElement.className);
         if (isNaN(number)){

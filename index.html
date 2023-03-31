@@ -3,36 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Alina's Birthday Quiz</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <script src="quiz.js"></script>
-    <!-- Welcome Page -->
     <div id="welcome">
       <h1>Happy Birthday Alina!</h1>
-      <p>Wishing you a wonderful day filled with love and joy.</p>
-      <button onclick="startQuiz()">Start Quiz</button>
+      <p>
+        We hope you have an amazing day filled with lots of love and joy! To
+        make your day even more special, we have a surprise gift for you - an
+        extreme driving course certificate. But before you can see your gift,
+        you have to pass a quiz! Good luck!
+      </p>
+      <button id="start-quiz">Take the Quiz</button>
     </div>
 
-    <!-- Quiz Page -->
-    <div id="quiz" style="display: none;">
+    <div id="quiz">
       <h2>Alina's Birthday Quiz</h2>
       <p id="question"></p>
       <div id="choices"></div>
-      <button onclick="checkAnswer()">Next</button>
-      <p id="progress"></p>
+      <button id="submit">Submit Answer</button>
+      <div id="progress"></div>
     </div>
 
-    <!-- Result Page -->
-    <div id="result" style="display: none;">
-      <h2>Congratulations Alina!</h2>
-      <p>You passed the birthday quiz!</p>
-      <img src="certificate.png" alt="Certificate" />
-      <p>Enjoy your extreme driving course!</p>
+    <div id="result">
+      <h2>Congratulations!</h2>
+      <p>You have passed the quiz and unlocked your surprise gift!</p>
+      <img
+        src="https://images.unsplash.com/photo-1603370571633-ee322ca9707a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZHJpdmluZyUyMGNvdXJzZXMlMjBzaG93JTIwZGFtYWdlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        alt="Certificate"
+      />
     </div>
 
-
+    <script src="script.js"></script>
   </body>
 </html>

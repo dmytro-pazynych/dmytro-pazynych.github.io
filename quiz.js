@@ -27,8 +27,4 @@ const quizData = [
 ];
 
 const welcome = document.getElementById("welcome");
-const quiz = document.getElementById("quiz");
-const result = document.getElementById("result");
-const questionEl = document.getElementById("question");
-const choicesEl = document.getElementById("choices");
-const
+const quiz = document.getElementById

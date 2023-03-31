@@ -1,83 +1,115 @@
-// get the back button element
-const backBtn = document.getElementById("back-btn");
+// Define the questions and their answers
+const questions = [
+  {
+    question: "How old are you?",
+    answers: [
+      { text: "25", correct: false },
+      { text: "26", correct: false },
+      { text: "27", correct: true },
+      { text: "28", correct: false }
+    ]
+  },
+  {
+    question: "What is your name?",
+    answers: [
+      { text: "Anna", correct: false },
+      { text: "Maria", correct: false },
+      { text: "Alina", correct: true },
+      { text: "Olga", correct: false }
+    ]
+  }
+];
 
-// determine the current page based on the title element
-const title = document.querySelector("title").textContent;
-let currentPage;
+// Get references to DOM elements
+const containerEl = document.querySelector(".container");
+const startButtonEl = document.querySelector("#start-btn");
+const nextButtonEl = document.querySelector("#next-btn");
+const questionEl = document.querySelector("#question");
+const answerButtonsEl = document.querySelector("#answer-buttons");
+const resultEl = document.querySelector("#result");
 
-switch (title) {
-  case "Birthday Quiz for Alina - Question 1":
-    currentPage = 1;
-    break;
-  case "Birthday Quiz for Alina - Question 2":
-    currentPage = 2;
-    break;
-  case "Birthday Quiz for Alina - Final Page":
-    currentPage = 3;
-    break;
-  default:
-    currentPage = 0;
-    break;
-}
+// Set up initial state
+let currentQuestionIndex = 0;
 
-// set the URL for the previous page based on the current page
-let prevPageUrl;
-switch (currentPage) {
-  case 1:
-    prevPageUrl = "index.html";
-    break;
-  case 2:
-    prevPageUrl = "question1.html";
-    break;
-  case 3:
-    prevPageUrl = "question2.html";
-    break;
-  default:
-    prevPageUrl = "index.html";
-    break;
-}
-
-// add event listener to back button to redirect to previous page
-backBtn.addEventListener("click", () => {
-  window.location.href = prevPageUrl;
+// Add event listeners to buttons
+startButtonEl.addEventListener("click", startQuiz);
+nextButtonEl.addEventListener("click", () => {
+  currentQuestionIndex++;
+  setNextQuestion();
 });
 
-// get the submit button element
-const submitBtn = document.getElementById("submit-btn");
+// Define the startQuiz function
+function startQuiz() {
+  // Hide the start button and show the first question
+  startButtonEl.classList.add("hide");
+  setNextQuestion();
+}
 
-if (submitBtn) {
-  // add event listener to submit button
-  submitBtn.addEventListener("click", (event) => {
-    event.preventDefault();
+// Define the setNextQuestion function
+function setNextQuestion() {
+  // Clear the previous question and answers
+  resetState();
+  // Show the next question and answers
+  showQuestion(questions[currentQuestionIndex]);
+}
 
-    // get the user's answer from the form
-    const userAnswer = document.getElementById("answer-input").value.trim().toLowerCase();
-
-    // set the URL for the next page based on the current page and user's answer
-    let nextPageUrl;
-    switch (currentPage) {
-      case 1:
-        if (userAnswer === "27") {
-          nextPageUrl = "question2.html";
-        } else {
-          alert("Wrong answer! Please try again.");
-        }
-        break;
-      case 2:
-        if (userAnswer === "alina") {
-          nextPageUrl = "final.html";
-        } else {
-          alert("Wrong answer! Please try again.");
-        }
-        break;
-      default:
-        nextPageUrl = "index.html";
-        break;
+// Define the showQuestion function
+function showQuestion(question) {
+  questionEl.innerText = question.question;
+  question.answers.forEach(answer => {
+    const button = document.createElement("button");
+    button.innerText = answer.text;
+    button.classList.add("answer");
+    if (answer.correct) {
+      button.dataset.correct = true;
     }
-
-    // redirect to the next page if the user answered correctly
-    if (nextPageUrl) {
-      window.location.href = nextPageUrl;
-    }
+    button.addEventListener("click", selectAnswer);
+    answerButtonsEl.appendChild(button);
   });
 }
+
+// Define the resetState function
+function resetState() {
+  nextButtonEl.classList.add("hide");
+  while (answerButtonsEl.firstChild) {
+    answerButtonsEl.removeChild(answerButtonsEl.firstChild);
+  }
+}
+
+// Define the selectAnswer function
+function selectAnswer(e) {
+  const selectedButton = e.target;
+  const correct = selectedButton.dataset.correct;
+  setStatusClass(selectedButton, correct);
+  Array.from(answerButtonsEl.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct);
+  });
+  if (currentQuestionIndex === questions.length - 1) {
+    nextButtonEl.innerText = "Finish";
+  }
+  if (currentQuestionIndex < questions.length - 1) {
+    nextButtonEl.classList.remove("hide");
+  } else {
+    startButtonEl.innerText = "Restart";
+    startButtonEl.classList.remove("hide");
+  }
+}
+
+// Define the setStatusClass function
+function setStatusClass(element, correct) {
+  clearStatusClass(element);
+  if (correct) {
+    element.classList.add("correct");
+  } else {
+    element.classList.add("incorrect");
+  }
+}
+
+// Define the clearStatusClass function
+function clearStatusClass(element) {
+  element.classList.remove("correct");
+  element.classList.remove("incorrect");
+}
+
+// Call the startQuiz function to start the quiz
+startQuiz();

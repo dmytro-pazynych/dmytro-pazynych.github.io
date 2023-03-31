@@ -1,6 +1,17 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: "Helvetica Neue", sans-serif;
+	background-color: #fff;
+	color: #000;
+}
+
 .container {
-	margin: 0 auto;
 	max-width: 600px;
+	margin: 0 auto;
 	padding: 20px;
 	text-align: center;
 }
@@ -8,8 +19,8 @@
 .btn {
 	display: inline-block;
 	padding: 10px 20px;
-	background-color: #0066cc;
-	color: #fff;
+	background-color: #8b0000;
+	color: #ffd700;
 	font-size: 18px;
 	border-radius: 5px;
 	text-decoration: none;
@@ -23,6 +34,7 @@ form {
 label {
 	display: block;
 	margin-bottom: 10px;
+	color: #8b0000;
 }
 
 input[type="radio"] {
@@ -32,8 +44,8 @@ input[type="radio"] {
 button {
 	margin-top: 10px;
 	padding: 10px 20px;
-	background-color: #0066cc;
-	color: #fff;
+	background-color: #8b0000;
+	color: #ffd700;
 	font-size: 18px;
 	border-radius: 5px;
 	border: none;
@@ -43,4 +55,31 @@ button {
 p#result {
 	margin-top: 20px;
 	font-weight: bold;
+	color: #8b0000;
 }
+
+@media only screen and (max-width: 375px) {
+	.container {
+		max-width: 100%;
+		padding: 10px;
+	}
+
+	h1 {
+		font-size: 28px;
+	}
+
+	p {
+		font-size: 18px;
+	}
+
+	.btn {
+		font-size: 16px;
+		padding: 8px 16px;
+		margin-top: 10px;
+	}
+
+	label {
+		font-size: 18px;
+	}
+
+	input[type="radio"]

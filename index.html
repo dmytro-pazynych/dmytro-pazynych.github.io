@@ -7,33 +7,49 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="welcome">
-      <h1>Happy Birthday Alina!</h1>
-      <p>
-        We hope you have an amazing day filled with lots of love and joy! To
-        make your day even more special, we have a surprise gift for you - an
-        extreme driving course certificate. But before you can see your gift,
-        you have to pass a quiz! Good luck!
-      </p>
-      <button id="start-quiz">Take the Quiz</button>
-    </div>
+    <header>
+      <nav>
+        <a href="#" class="logo">Alina's Quiz</a>
+        <ul class="menu">
+          <li><a href="#" id="home">Home</a></li>
+          <li><a href="#" id="quiz">Quiz</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <div id="quiz">
-      <h2>Alina's Birthday Quiz</h2>
-      <p id="question"></p>
-      <div id="choices"></div>
-      <button id="submit">Submit Answer</button>
-      <div id="progress"></div>
-    </div>
+    <main>
+      <div id="welcome">
+        <h1>Happy Birthday Alina!</h1>
+        <p>
+          We hope you have an amazing day filled with lots of love and joy! To
+          make your day even more special, we have a surprise gift for you - an
+          extreme driving course certificate. But before you can see your gift,
+          you have to pass a quiz! Good luck!
+        </p>
+        <button id="start-quiz">Take the Quiz</button>
+      </div>
 
-    <div id="result">
-      <h2>Congratulations!</h2>
-      <p>You have passed the quiz and unlocked your surprise gift!</p>
-      <img
-        src="https://images.unsplash.com/photo-1603370571633-ee322ca9707a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZHJpdmluZyUyMGNvdXJzZXMlMjBzaG93JTIwZGFtYWdlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-        alt="Certificate"
-      />
-    </div>
+      <div id="quiz">
+        <h2>Alina's Birthday Quiz</h2>
+        <p id="question"></p>
+        <div id="choices"></div>
+        <button id="submit">Submit Answer</button>
+        <div id="progress"></div>
+      </div>
+
+      <div id="result">
+        <h2>Congratulations!</h2>
+        <p>You have passed the quiz and unlocked your surprise gift!</p>
+        <img
+          src="https://images.unsplash.com/photo-1603370571633-ee322ca9707a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZHJpdmluZyUyMGNvdXJzZXMlMjBzaG93JTIwZGFtYWdlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          alt="Certificate"
+        />
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 Alina's Quiz. All rights reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
   </body>

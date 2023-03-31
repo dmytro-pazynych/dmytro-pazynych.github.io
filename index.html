@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Birthday Quiz for Alina</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<div class="container">
-		<h1>Happy Birthday, Alina!</h1>
-		<p>Thank you for taking this quiz on your special day.</p>
-		<p>This quiz is all about you! Let's see how well your partner knows you.</p>
-		<button id="start-btn">Start Quiz</button>
-	</div>
-	<script src="quiz.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Alina's Birthday Quiz</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Welcome Page -->
+    <div id="welcome">
+      <h1>Happy Birthday Alina!</h1>
+      <p>Wishing you a wonderful day filled with love and joy.</p>
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz" style="display: none;">
+      <h2>Alina's Birthday Quiz</h2>
+      <p id="question"></p>
+      <div id="choices"></div>
+      <button onclick="checkAnswer()">Next</button>
+      <p id="progress"></p>
+    </div>
+
+    <!-- Result Page -->
+    <div id="result" style="display: none;">
+      <h2>Congratulations Alina!</h2>
+      <p>You passed the birthday quiz!</p>
+      <img src="certificate.png" alt="Certificate" />
+      <p>Enjoy your extreme driving course!</p>
+    </div>
+
+    <script src="quiz.js"></script>
+  </body>
 </html>

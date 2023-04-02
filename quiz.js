@@ -1,69 +1,117 @@
-// Quiz questions and answers
+// array of quiz questions and answers
 const quizData = [
   {
-    question: "What is Alina's Maltese dog's name?",
-    choices: ["Bella", "Lucy", "Luna"],
-    answer: "Bella",
-  },
-  {
-    question: "What is Alina's favorite sport?",
-    choices: ["Tennis", "Soccer", "Basketball"],
-    answer: "Tennis",
+    question: "What is Alina's favorite winter activity?",
+    answers: [
+      "Skiing",
+      "Snowboarding",
+      "Ice skating",
+      "Building snowmen"
+    ],
+    correctAnswer: 1
   },
   {
     question: "What is Alina's favorite color?",
-    choices: ["Red", "Green", "Blue"],
-    answer: "Burgundy",
+    answers: [
+      "Red",
+      "Burgundy",
+      "Gold",
+      "Pink"
+    ],
+    correctAnswer: 1
   },
   {
-    question: "What is Alina's favorite winter sport?",
-    choices: ["Skiing", "Snowboarding", "Ice skating"],
-    answer: "Snowboarding",
+    question: "What is the name of Alina's dog?",
+    answers: [
+      "Buddy",
+      "Rocky",
+      "Charlie",
+      "Max"
+    ],
+    correctAnswer: 2
   },
   {
-    question: "What is Alina's favorite water sport?",
-    choices: ["Swimming", "Surfing", "Wakeboarding"],
-    answer: "Wakeboarding",
+    question: "What is Alina's favorite sport?",
+    answers: [
+      "Tennis",
+      "Soccer",
+      "Basketball",
+      "Golf"
+    ],
+    correctAnswer: 0
   },
+  {
+    question: "What is Alina's favorite type of food?",
+    answers: [
+      "Italian",
+      "Mexican",
+      "Chinese",
+      "American"
+    ],
+    correctAnswer: 0
+  }
 ];
 
-// Get DOM elements
-const startBtn = document.getElementById("start-quiz");
-const homeBtn = document.getElementById("home");
-const quizBtn = document.getElementById("quiz");
-const questionEl = document.getElementById("question");
-const choicesEl = document.getElementById("choices");
-const submitBtn = document.getElementById("submit");
-const progressEl = document.getElementById("progress");
-const resultEl = document.getElementById("result");
+// get HTML elements
+const questionElement = document.getElementById("question");
+const answerElements = document.querySelectorAll(".answer");
+const submitButton = document.getElementById("submit");
+const resultsContainer = document.getElementById("results");
 
-// Quiz state variables
 let currentQuestion = 0;
 let score = 0;
 
-// Load home page and quiz page
-function loadHome() {
-  document.getElementById("welcome").style.display = "block";
+// load first question
+loadQuestion();
+
+// event listeners
+submitButton.addEventListener("click", nextQuestion);
+
+// functions
+function loadQuestion() {
+  const question = quizData[currentQuestion].question;
+  const answers = quizData[currentQuestion].answers;
+
+  // set question text
+  questionElement.innerText = question;
+
+  // set answer text
+  answerElements.forEach((answerElement, index) => {
+    answerElement.innerText = answers[index];
+  });
+}
+
+function nextQuestion() {
+  // check if answer is correct
+  if (getSelectedAnswer() === quizData[currentQuestion].correctAnswer) {
+    score++;
+  }
+
+  // move to next question or show results
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;
+    loadQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function getSelectedAnswer() {
+  // loop through answer elements to find selected answer
+  for (let i = 0; i < answerElements.length; i++) {
+    if (answerElements[i].checked) {
+      return i;
+    }
+  }
+  return null; // no answer selected
+}
+
+function showResults() {
+  // hide quiz and show results
   document.getElementById("quiz").style.display = "none";
-  document.getElementById("result").style.display = "none";
+  resultsContainer.style.display = "block";
+
+  // set result text
+  const resultText = `Congratulations, you scored ${score} out of ${quizData.length}!`;
+  resultsContainer.innerText = resultText;
 }
-
-function loadQuiz() {
-  document.getElementById("welcome").style.display = "none";
-  document.getElementById("quiz").style.display = "block";
-  document.getElementById("result").style.display = "none";
-
-  showQuestion();
-}
-
-// Display quiz questions and choices
-function showQuestion() {
-  const quizQuestion = quizData[currentQuestion];
-  questionEl.innerText = quizQuestion.question;
-
-  choicesEl.innerHTML = "";
-  quizQuestion.choices.forEach((choice) => {
-    const button = document.createElement("button");
-    button.innerText = choice;
-    button.classList.add("choice");
-    button.addEventListener("click",

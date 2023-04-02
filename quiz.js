@@ -1,117 +1,125 @@
-// array of quiz questions and answers
-const quizData = [
-  {
-    question: "What is Alina's favorite winter activity?",
-    answers: [
-      "Skiing",
-      "Snowboarding",
-      "Ice skating",
-      "Building snowmen"
-    ],
-    correctAnswer: 1
-  },
+// Questions array
+const questions = [
   {
     question: "What is Alina's favorite color?",
-    answers: [
-      "Red",
-      "Burgundy",
-      "Gold",
-      "Pink"
-    ],
-    correctAnswer: 1
+    answers: {
+      a: "Blue",
+      b: "Red",
+      c: "Green",
+      d: "Yellow"
+    },
+    correctAnswer: "b"
+  },
+  {
+    question: "What is Alina's favorite winter sport?",
+    answers: {
+      a: "Snowboarding",
+      b: "Skiing",
+      c: "Ice skating",
+      d: "Hockey"
+    },
+    correctAnswer: "a"
   },
   {
     question: "What is the name of Alina's dog?",
-    answers: [
-      "Buddy",
-      "Rocky",
-      "Charlie",
-      "Max"
-    ],
-    correctAnswer: 2
+    answers: {
+      a: "Max",
+      b: "Buddy",
+      c: "Charlie",
+      d: "Rocky"
+    },
+    correctAnswer: "c"
   },
   {
-    question: "What is Alina's favorite sport?",
-    answers: [
-      "Tennis",
-      "Soccer",
-      "Basketball",
-      "Golf"
-    ],
-    correctAnswer: 0
+    question: "What is Alina's favorite hobby?",
+    answers: {
+      a: "Playing tennis",
+      b: "Reading books",
+      c: "Watching movies",
+      d: "Playing video games"
+    },
+    correctAnswer: "a"
   },
   {
-    question: "What is Alina's favorite type of food?",
-    answers: [
-      "Italian",
-      "Mexican",
-      "Chinese",
-      "American"
-    ],
-    correctAnswer: 0
+    question: "What is Alina's age on her birthday?",
+    answers: {
+      a: "26",
+      b: "27",
+      c: "28",
+      d: "29"
+    },
+    correctAnswer: "b"
   }
 ];
 
-// get HTML elements
-const questionElement = document.getElementById("question");
-const answerElements = document.querySelectorAll(".answer");
-const submitButton = document.getElementById("submit");
+// Variables
+const quizContainer = document.getElementById("quiz");
 const resultsContainer = document.getElementById("results");
+const submitButton = document.getElementById("submit");
 
-let currentQuestion = 0;
-let score = 0;
+// Display quiz
+function buildQuiz() {
+  const output = [];
 
-// load first question
-loadQuestion();
+  questions.forEach((currentQuestion, questionNumber) => {
+    const answers = [];
 
-// event listeners
-submitButton.addEventListener("click", nextQuestion);
-
-// functions
-function loadQuestion() {
-  const question = quizData[currentQuestion].question;
-  const answers = quizData[currentQuestion].answers;
-
-  // set question text
-  questionElement.innerText = question;
-
-  // set answer text
-  answerElements.forEach((answerElement, index) => {
-    answerElement.innerText = answers[index];
-  });
-}
-
-function nextQuestion() {
-  // check if answer is correct
-  if (getSelectedAnswer() === quizData[currentQuestion].correctAnswer) {
-    score++;
-  }
-
-  // move to next question or show results
-  if (currentQuestion < quizData.length - 1) {
-    currentQuestion++;
-    loadQuestion();
-  } else {
-    showResults();
-  }
-}
-
-function getSelectedAnswer() {
-  // loop through answer elements to find selected answer
-  for (let i = 0; i < answerElements.length; i++) {
-    if (answerElements[i].checked) {
-      return i;
+    for (letter in currentQuestion.answers) {
+      answers.push(
+        `<label>
+           <input type="radio" name="question${questionNumber}" value="${letter}">
+            ${letter} :
+            ${currentQuestion.answers[letter]}
+         </label>`
+      );
     }
-  }
-  return null; // no answer selected
+
+    output.push(
+      `<div class="slide">
+         <div class="question"> ${currentQuestion.question} </div>
+         <div class="answers"> ${answers.join("")} </div>
+       </div>`
+    );
+  });
+
+  quizContainer.innerHTML = output.join("");
 }
 
+// Show results
 function showResults() {
-  // hide quiz and show results
-  document.getElementById("quiz").style.display = "none";
-  resultsContainer.style.display = "block";
+  const answerContainers = quizContainer.querySelectorAll(".answers");
+  let numCorrect = 0;
 
-  // set result text
-  const resultText = `Congratulations, you scored ${score} out of ${quizData.length}!`;
-  resultsContainer.innerText = resultText;
+  questions.forEach((currentQuestion, questionNumber) => {
+    const answerContainer = answerContainers[questionNumber];
+    const selector = `input[name=question${questionNumber}]:checked`;
+    const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+    if (userAnswer === currentQuestion.correctAnswer) {
+      numCorrect++;
+      answerContainers[questionNumber].style.color = "green";
+    } else {
+      answerContainers[questionNumber].style.color = "red";
+    }
+  });
+
+  resultsContainer.innerHTML = `${numCorrect} out of ${questions.length}`;
 }
+
+// Variables for slide control
+const slides = document.querySelectorAll(".slide");
+let currentSlide = 0;
+
+// Show first slide
+function showSlide(n) {
+  slides[currentSlide].classList.remove("active-slide");
+  slides[n].classList.add("active-slide");
+  currentSlide = n;
+
+  if (currentSlide === 0) {
+    document.getElementById("previous").style.display = "none";
+  } else {
+    document.getElementById("previous").style.display = "inline-block";
+  }
+
+  if (currentSlide === slides.length - 1)
